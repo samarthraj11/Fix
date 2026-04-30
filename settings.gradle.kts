@@ -22,5 +22,8 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Fix"
+rootProject.name = "Credit"
 include(":app")
+include(":designsystem")
+include(":domain")
+include(":feature")
