@@ -11,13 +11,14 @@ internal object BaseColors {
 
     val White = Color(0xFFFFFFFF)
 
-    // Primary (purple) tonal scale
-    val Purple20 = Color(0xFF22005D)
-    val Purple30 = Color(0xFF4F378A)
-    val Purple40 = Color(0xFF6750A4)
-    val Purple80 = Color(0xFFCFBCFF)
-    val Purple90 = Color(0xFFE0D2FF)
-    val Purple95 = Color(0xFFE9DDFF)
+    // Primary (emerald green) tonal scale
+    val Green10 = Color(0xFF002116)
+    val Green20 = Color(0xFF003825)
+    val Green30 = Color(0xFF047857) // forest green — from design
+    val Green40 = Color(0xFF059669) // emerald — from design, main primary
+    val Green80 = Color(0xFF6BCFA0)
+    val Green90 = Color(0xFFC8EDD7) // light container — from design
+    val Green95 = Color(0xFFF0FAF4) // subtle bg — from design
 
     // Secondary (muted purple) tonal scale
     val SecondaryPurple15 = Color(0xFF1F1635)
@@ -26,6 +27,7 @@ internal object BaseColors {
     val SecondaryPurple50 = Color(0xFF645A7D)
     val SecondaryPurple85 = Color(0xFFCDC0E9)
     val SecondaryPurple90 = Color(0xFFE1D4FD)
+    val SecondaryPurple95 = Color(0xFFE9DDFF)
 
     // Tertiary (gold) tonal scale
     val Gold10 = Color(0xFF241A00)

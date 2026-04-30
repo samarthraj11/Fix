@@ -73,22 +73,22 @@ data class CreditSemanticColors(
 
 val LightSemanticColors = CreditSemanticColors(
     // Primary
-    primary = B.Purple30,
+    primary = B.Green40,
     onPrimary = B.White,
-    primaryContainer = B.Purple40,
-    onPrimaryContainer = B.Purple90,
-    inversePrimary = B.Purple80,
-    primaryFixed = B.Purple95,
-    primaryFixedDim = B.Purple80,
-    onPrimaryFixed = B.Purple20,
-    onPrimaryFixedVariant = B.Purple30,
+    primaryContainer = B.Green90,
+    onPrimaryContainer = B.Green10,
+    inversePrimary = B.Green80,
+    primaryFixed = B.Green95,
+    primaryFixedDim = B.Green80,
+    onPrimaryFixed = B.Green10,
+    onPrimaryFixedVariant = B.Green30,
 
     // Secondary
     secondary = B.SecondaryPurple40,
     onSecondary = B.White,
     secondaryContainer = B.SecondaryPurple90,
     onSecondaryContainer = B.SecondaryPurple50,
-    secondaryFixed = B.Purple95,
+    secondaryFixed = B.SecondaryPurple95,
     secondaryFixedDim = B.SecondaryPurple85,
     onSecondaryFixed = B.SecondaryPurple15,
     onSecondaryFixedVariant = B.SecondaryPurple30,
@@ -123,7 +123,7 @@ val LightSemanticColors = CreditSemanticColors(
     surfaceContainer = B.Neutral94,
     surfaceContainerHigh = B.Neutral92,
     surfaceContainerHighest = B.Neutral90,
-    surfaceTint = B.Purple40,
+    surfaceTint = B.Green40,
     inverseSurface = B.Neutral20,
     inverseOnSurface = B.Neutral97,
 
