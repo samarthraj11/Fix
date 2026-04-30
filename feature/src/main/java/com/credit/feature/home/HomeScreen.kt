@@ -15,6 +15,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
@@ -29,6 +30,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.credit.designsystem.tokens.LocalCreditColors
 import com.credit.domain.model.Post
 import org.orbitmvi.orbit.compose.collectAsState
 import org.orbitmvi.orbit.compose.collectSideEffect
@@ -62,10 +64,14 @@ fun HomeScreen(
     ) { padding ->
         Box(modifier = Modifier.fillMaxSize().padding(padding)) {
             when {
-                state.isLoading -> CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
+                state.isLoading -> CircularProgressIndicator(
+                    modifier = Modifier.align(Alignment.Center),
+                    color = LocalCreditColors.current.primary,
+                )
                 state.error != null && state.posts.isEmpty() -> Text(
                     text = "Error: ${state.error}",
-                    modifier = Modifier.align(Alignment.Center)
+                    modifier = Modifier.align(Alignment.Center),
+                    color = LocalCreditColors.current.error,
                 )
                 else -> PostList(state.posts)
             }
@@ -91,8 +97,16 @@ private fun PostList(posts: List<Post>) {
         }
         items(posts, key = { it.id }) { post ->
             Column {
-                Text(text = post.title, style = androidx.compose.material3.MaterialTheme.typography.titleMedium)
-                Text(text = post.body, style = androidx.compose.material3.MaterialTheme.typography.bodyMedium)
+                Text(
+                    text = post.title,
+                    style = MaterialTheme.typography.titleMedium,
+                    color = LocalCreditColors.current.onSurface,
+                )
+                Text(
+                    text = post.body,
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = LocalCreditColors.current.onSurfaceVariant,
+                )
             }
         }
     }
