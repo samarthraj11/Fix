@@ -41,7 +41,7 @@ data class Language(val name: String, val nativeName: String)
 private val SupportedLanguages = listOf(
     Language("English", "English"),
     Language("Hindi", "हिंदी"),
-    Language("Hinglish", "हिन्ग्लिश"),
+    Language("Hinglish", "Hinglish"),
 )
 
 @Composable
