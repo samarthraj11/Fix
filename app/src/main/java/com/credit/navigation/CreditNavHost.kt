@@ -1,13 +1,16 @@
 package com.credit.navigation
 
 import androidx.compose.runtime.Composable
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.credit.domain.session.SessionManager
 import com.credit.feature.home.HomeScreen
 import com.credit.feature.onboarding.LanguageScreen
-import com.credit.feature.onboarding.OnboardingScreen
+import com.credit.feature.onboarding.OtpScreen
+import com.credit.feature.onboarding.PhoneNumberScreen
 
 @Composable
 fun CreditNavHost(sessionManager: SessionManager) {
@@ -18,21 +21,35 @@ fun CreditNavHost(sessionManager: SessionManager) {
         composable(Destination.Language.route) {
             LanguageScreen(
                 onContinue = {
-                    navController.navigate(Destination.Onboarding.route) {
+                    navController.navigate(Destination.PhoneNumber.route) {
                         popUpTo(Destination.Language.route) { inclusive = true }
                     }
                 }
             )
         }
-        composable(Destination.Onboarding.route) {
-            OnboardingScreen(
-                onLoggedIn = {
+
+        composable(Destination.PhoneNumber.route) {
+            PhoneNumberScreen(
+                onNavigateToOtp = { phoneNumber ->
+                    navController.navigate(Destination.Otp.route(phoneNumber))
+                }
+            )
+        }
+
+        composable(
+            route = Destination.Otp.route,
+            arguments = listOf(navArgument(Destination.Otp.ARG_PHONE) { type = NavType.StringType }),
+        ) {
+            OtpScreen(
+                onBack = { navController.popBackStack() },
+                onVerified = {
                     navController.navigate(Destination.Home.route) {
-                        popUpTo(Destination.Onboarding.route) { inclusive = true }
+                        popUpTo(Destination.Language.route) { inclusive = true }
                     }
                 }
             )
         }
+
         composable(Destination.Home.route) {
             HomeScreen(
                 onLoggedOut = {

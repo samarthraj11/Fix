@@ -25,16 +25,16 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.credit.designsystem.components.CreditButton
 import com.credit.designsystem.tokens.LocalCreditColors
+import org.orbitmvi.orbit.compose.collectAsState
+import org.orbitmvi.orbit.compose.collectSideEffect
 
 data class Language(val name: String, val nativeName: String)
 
@@ -45,14 +45,24 @@ private val SupportedLanguages = listOf(
 )
 
 @Composable
-fun LanguageScreen(onContinue: () -> Unit) {
-    var selected by remember { mutableStateOf(SupportedLanguages.first()) }
+fun LanguageScreen(
+    onContinue: () -> Unit,
+    viewModel: LanguageViewModel = hiltViewModel(),
+) {
+    val state by viewModel.collectAsState()
+
+    viewModel.collectSideEffect { effect ->
+        when (effect) {
+            LanguageSideEffect.NavigateToPhoneNumber -> onContinue()
+        }
+    }
+
     val colors = LocalCreditColors.current
 
     Scaffold(
         bottomBar = {
             Column(Modifier.padding(horizontal = 16.dp, vertical = 16.dp)) {
-                CreditButton(text = "Continue", onClick = onContinue)
+                CreditButton(text = "Continue", onClick = viewModel::onContinue)
             }
         }
     ) { padding ->
@@ -102,7 +112,6 @@ fun LanguageScreen(onContinue: () -> Unit) {
 
             Spacer(Modifier.height(32.dp))
 
-            // 2-column grid — chunk list into rows of 2
             val rows = SupportedLanguages.chunked(2)
             Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
                 rows.forEach { row ->
@@ -113,12 +122,11 @@ fun LanguageScreen(onContinue: () -> Unit) {
                         row.forEach { language ->
                             LanguageCard(
                                 language = language,
-                                isSelected = language == selected,
-                                onClick = { selected = language },
+                                isSelected = language == state.selectedLanguage,
+                                onClick = { viewModel.onLanguageSelected(language) },
                                 modifier = Modifier.weight(1f),
                             )
                         }
-                        // pad last row if odd number of items
                         if (row.size < 2) Spacer(Modifier.weight(1f))
                     }
                 }
