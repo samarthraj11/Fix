@@ -1,15 +1,51 @@
 *.iml
 .gradle
+.gradle/
 /local.properties
+local.properties
+.DS_Store
+
+# Build outputs (any module)
+build/
+/build
+/captures
+.externalNativeBuild
+.cxx
+*.apk
+*.ap_
+*.aab
+*.dex
+
+# Generated
+**/generated/
+**/intermediates/
+**/outputs/
+**/tmp/
+
+# IDE
+.idea/
 /.idea/caches
 /.idea/libraries
 /.idea/modules.xml
 /.idea/workspace.xml
 /.idea/navEditor.xml
 /.idea/assetWizardSettings.xml
-.DS_Store
-/build
-/captures
-.externalNativeBuild
-.cxx
-local.properties
+/.idea/.name
+/.idea/compiler.xml
+/.idea/gradle.xml
+/.idea/misc.xml
+/.idea/vcs.xml
+/.idea/deploymentTargetSelector.xml
+/.idea/runConfigurations.xml
+/.idea/markdown.xml
+/.idea/AndroidProjectSystem.xml
+/.idea/appInsightsSettings.xml
+/.idea/inspectionProfiles/
+*.iws
+
+# Kotlin / KSP
+.kotlin/
+hs_err_pid*
+
+# Logs
+*.log
