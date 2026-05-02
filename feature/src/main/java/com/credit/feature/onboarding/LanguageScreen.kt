@@ -33,6 +33,9 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.credit.designsystem.components.CreditButton
 import com.credit.designsystem.tokens.LocalCreditColors
+import com.credit.feature.navigation.Destination
+import com.credit.feature.navigation.LocalNavigator
+import com.credit.feature.navigation.ScreenDestination
 import org.orbitmvi.orbit.compose.collectAsState
 import org.orbitmvi.orbit.compose.collectSideEffect
 
@@ -40,20 +43,19 @@ data class Language(val name: String, val nativeName: String)
 
 private val SupportedLanguages = listOf(
     Language("English", "English"),
-    Language("Hindi", "हिंदी"),
     Language("Hinglish", "Hinglish"),
+    Language("Hindi", "हिंदी"),
 )
 
+@Destination
 @Composable
-fun LanguageScreen(
-    onContinue: () -> Unit,
-    viewModel: LanguageViewModel = hiltViewModel(),
-) {
+fun LanguageScreen(viewModel: LanguageViewModel = hiltViewModel()) {
     val state by viewModel.collectAsState()
+    val navigator = LocalNavigator.current
 
     viewModel.collectSideEffect { effect ->
         when (effect) {
-            LanguageSideEffect.NavigateToPhoneNumber -> onContinue()
+            LanguageSideEffect.NavigateToPhoneNumber -> navigator.navigate(ScreenDestination.PhoneNumber)
         }
     }
 
