@@ -112,7 +112,6 @@ fun PhoneNumberScreen(viewModel: PhoneNumberViewModel = hiltViewModel()) {
                     .fillMaxWidth()
                     .padding(horizontal = 16.dp),
             ) {
-                // Phone input label
                 Text(
                     text = "Enter your Mobile Number",
                     style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold),
@@ -121,7 +120,6 @@ fun PhoneNumberScreen(viewModel: PhoneNumberViewModel = hiltViewModel()) {
 
                 Spacer(Modifier.height(12.dp))
 
-                // Phone input container
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -161,7 +159,6 @@ fun PhoneNumberScreen(viewModel: PhoneNumberViewModel = hiltViewModel()) {
 
                 Spacer(Modifier.height(16.dp))
 
-                // Consent checkbox
                 Row(
                     verticalAlignment = Alignment.Top,
                     modifier = Modifier.fillMaxWidth(),
@@ -191,7 +188,6 @@ fun PhoneNumberScreen(viewModel: PhoneNumberViewModel = hiltViewModel()) {
 
                 Spacer(Modifier.height(20.dp))
 
-                // Next button
                 Button(
                     onClick = viewModel::onSubmit,
                     modifier = Modifier.fillMaxWidth(),
