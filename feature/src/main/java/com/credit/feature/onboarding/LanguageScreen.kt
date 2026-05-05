@@ -99,7 +99,7 @@ fun LanguageScreen(viewModel: LanguageViewModel = hiltViewModel()) {
             Spacer(Modifier.height(24.dp))
 
             Text(
-                text = "Welcome to Fix",
+                text = "Welcome to Fixx",
                 style = MaterialTheme.typography.headlineSmall,
                 color = colors.onBackground,
             )
