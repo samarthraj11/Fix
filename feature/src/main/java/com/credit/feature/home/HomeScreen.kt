@@ -32,22 +32,24 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.credit.designsystem.tokens.LocalCreditColors
 import com.credit.domain.model.Post
+import com.credit.feature.navigation.Destination
+import com.credit.feature.navigation.LocalNavigator
+import com.credit.feature.navigation.ScreenDestination
 import org.orbitmvi.orbit.compose.collectAsState
 import org.orbitmvi.orbit.compose.collectSideEffect
 
+@Destination
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomeScreen(
-    onLoggedOut: () -> Unit,
-    viewModel: HomeViewModel = hiltViewModel()
-) {
+fun HomeScreen(viewModel: HomeViewModel = hiltViewModel()) {
     val state by viewModel.collectAsState()
     val snackbarHostState = remember { SnackbarHostState() }
+    val navigator = LocalNavigator.current
 
     viewModel.collectSideEffect { effect ->
         when (effect) {
             is HomeSideEffect.ShowError -> snackbarHostState.showSnackbar(effect.message)
-            HomeSideEffect.NavigateToOnboarding -> onLoggedOut()
+            HomeSideEffect.NavigateToOnboarding -> navigator.navigate(ScreenDestination.Language)
         }
     }
 

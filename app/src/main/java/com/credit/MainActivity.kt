@@ -7,6 +7,8 @@ import androidx.activity.enableEdgeToEdge
 import com.credit.designsystem.theme.CreditTheme
 import com.credit.domain.session.SessionManager
 import com.credit.navigation.CreditNavHost
+import com.credit.navigation.HomeNavGraph
+import com.credit.navigation.OnboardingNavGraph
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -20,7 +22,10 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             CreditTheme {
-                CreditNavHost(sessionManager = sessionManager)
+                CreditNavHost(
+                    startGraph = if (sessionManager.isLoggedIn()) HomeNavGraph else OnboardingNavGraph,
+                    graphs = listOf(OnboardingNavGraph, HomeNavGraph),
+                )
             }
         }
     }
