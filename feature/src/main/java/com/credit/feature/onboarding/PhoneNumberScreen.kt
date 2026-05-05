@@ -176,7 +176,7 @@ fun PhoneNumberScreen(viewModel: PhoneNumberViewModel = hiltViewModel()) {
                         text = buildAnnotatedString {
                             append("I agree to the ")
                             withStyle(SpanStyle(color = colors.primary, fontWeight = FontWeight.Medium)) {
-                                append("Terms & Privacy Policy")
+                                append("Terms & Privacy Policy" )
                             }
                             append(" and authorize credit report fetch.")
                         },
