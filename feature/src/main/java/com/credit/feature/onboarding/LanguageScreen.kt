@@ -43,8 +43,8 @@ data class Language(val name: String, val nativeName: String)
 
 private val SupportedLanguages = listOf(
     Language("English", "English"),
-    Language("Hinglish", "Hinglish"),
     Language("Hindi", "हिंदी"),
+    Language("Hinglish", "Hinglish"),
 
 )
 
