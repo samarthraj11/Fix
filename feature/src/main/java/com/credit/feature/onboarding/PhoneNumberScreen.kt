@@ -48,21 +48,23 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
 import com.credit.designsystem.tokens.LocalCreditColors
+import com.credit.feature.navigation.Destination
+import com.credit.feature.navigation.LocalNavigator
+import com.credit.feature.navigation.ScreenDestination
 import org.orbitmvi.orbit.compose.collectAsState
 import org.orbitmvi.orbit.compose.collectSideEffect
 
+@Destination
 @Composable
-fun PhoneNumberScreen(
-    onNavigateToOtp: (String) -> Unit,
-    viewModel: PhoneNumberViewModel = hiltViewModel(),
-) {
+fun PhoneNumberScreen(viewModel: PhoneNumberViewModel = hiltViewModel()) {
     val state by viewModel.collectAsState()
     val snackbarHostState = remember { SnackbarHostState() }
     val colors = LocalCreditColors.current
+    val navigator = LocalNavigator.current
 
     viewModel.collectSideEffect { effect ->
         when (effect) {
-            is PhoneNumberSideEffect.NavigateToOtp -> onNavigateToOtp(effect.phoneNumber)
+            is PhoneNumberSideEffect.NavigateToOtp -> navigator.navigate(ScreenDestination.Otp(effect.phoneNumber))
             is PhoneNumberSideEffect.ShowError -> snackbarHostState.showSnackbar(effect.message)
         }
     }

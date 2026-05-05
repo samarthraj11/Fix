@@ -56,23 +56,24 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.credit.designsystem.components.CreditButton
 import com.credit.designsystem.tokens.LocalCreditColors
+import com.credit.feature.navigation.Destination
+import com.credit.feature.navigation.LocalNavigator
+import com.credit.feature.navigation.ScreenDestination
 import org.orbitmvi.orbit.compose.collectAsState
 import org.orbitmvi.orbit.compose.collectSideEffect
 
+@Destination
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun OtpScreen(
-    onBack: () -> Unit,
-    onVerified: () -> Unit,
-    viewModel: OtpViewModel = hiltViewModel(),
-) {
+fun OtpScreen(viewModel: OtpViewModel = hiltViewModel()) {
     val state by viewModel.collectAsState()
     val snackbarHostState = remember { SnackbarHostState() }
     val colors = LocalCreditColors.current
+    val navigator = LocalNavigator.current
 
     viewModel.collectSideEffect { effect ->
         when (effect) {
-            OtpSideEffect.NavigateToHome -> onVerified()
+            OtpSideEffect.NavigateToHome -> navigator.navigate(ScreenDestination.Home)
             is OtpSideEffect.ShowError -> snackbarHostState.showSnackbar(effect.message)
         }
     }
@@ -82,7 +83,7 @@ fun OtpScreen(
             TopAppBar(
                 title = {},
                 navigationIcon = {
-                    IconButton(onClick = onBack) {
+                    IconButton(onClick = { navigator.navigate(ScreenDestination.Back) }) {
                         Icon(
                             imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                             contentDescription = "Back",
