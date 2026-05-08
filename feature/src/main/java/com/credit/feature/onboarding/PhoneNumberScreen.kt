@@ -76,7 +76,6 @@ fun PhoneNumberScreen(viewModel: PhoneNumberViewModel = hiltViewModel()) {
                 .padding(padding)
                 .verticalScroll(rememberScrollState()),
         ) {
-            // Hero image
             AsyncImage(
                 model = "https://lh3.googleusercontent.com/aida-public/AB6AXuBRnBobB97uwmrPZZ324aoNm2YIYsgvvaQsqdVS6onL_S71vx9PYm15s7jwKs8BhO4s4Rbj6eOvbBb8Pb8TNffHUVcL4EPdEJtZ7rKUqPtDdUeJkWukmb9aSoukS82Qe9_aff1_KuQQtkZA-3znFT7f08v05TVqQUIM8UGvXxLoIrjnmRq4CWnfJYUEZd6n4DBqR85iyuqXaT-g141PFhLDO96X32pqhdGveuHKBUJeCUxDyKWULB-Zo_t_2HSloxDzuvWLEmWy4ean",
                 contentDescription = null,
@@ -86,7 +85,6 @@ fun PhoneNumberScreen(viewModel: PhoneNumberViewModel = hiltViewModel()) {
 
             Spacer(Modifier.height(16.dp))
 
-            // Title with colored highlights
             Text(
                 text = buildAnnotatedString {
                     withStyle(SpanStyle(color = colors.primary, fontWeight = FontWeight.ExtraBold, fontSize = 24.sp)) {
