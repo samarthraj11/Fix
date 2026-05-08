@@ -82,9 +82,7 @@ fun PhoneNumberScreen(viewModel: PhoneNumberViewModel = hiltViewModel()) {
                 contentScale = ContentScale.FillWidth,
                 modifier = Modifier.fillMaxWidth(),
             )
-
             Spacer(Modifier.height(16.dp))
-
             Text(
                 text = buildAnnotatedString {
                     withStyle(SpanStyle(color = colors.primary, fontWeight = FontWeight.ExtraBold, fontSize = 24.sp)) {
