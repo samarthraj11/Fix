@@ -1,4 +1,4 @@
-package com.credit.feature.onboarding
+package com.credit.feature.onboarding.phone_number
 
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel

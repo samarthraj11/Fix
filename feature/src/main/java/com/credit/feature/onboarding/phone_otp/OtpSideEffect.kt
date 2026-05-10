@@ -1,4 +1,4 @@
-package com.credit.feature.onboarding
+package com.credit.feature.onboarding.phone_otp
 
 sealed interface OtpSideEffect {
     data object NavigateToHome : OtpSideEffect

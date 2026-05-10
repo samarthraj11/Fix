@@ -4,9 +4,9 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavType
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
-import com.credit.feature.onboarding.LanguageScreen
-import com.credit.feature.onboarding.OtpScreen
-import com.credit.feature.onboarding.PhoneNumberScreen
+import com.credit.feature.onboarding.language.LanguageScreen
+import com.credit.feature.onboarding.phone_otp.OtpScreen
+import com.credit.feature.onboarding.phone_number.PhoneNumberScreen
 
 object OnboardingNavGraph : NavGraph {
     override val route = "onboarding"

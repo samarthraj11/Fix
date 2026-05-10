@@ -1,4 +1,4 @@
-package com.credit.feature.onboarding
+package com.credit.feature.onboarding.phone_number
 
 data class PhoneNumberState(
     val phoneNumber: String = "",
