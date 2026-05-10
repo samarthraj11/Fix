@@ -58,18 +58,18 @@ import org.orbitmvi.orbit.compose.collectSideEffect
 @Composable
 fun PhoneNumberScreen(viewModel: PhoneNumberViewModel = hiltViewModel()) {
     val state by viewModel.collectAsState()
-    val snackbarHostState = remember { SnackbarHostState() }
+    val snackBarHostState = remember { SnackbarHostState() }
     val colors = LocalCreditColors.current
     val navigator = LocalNavigator.current
 
     viewModel.collectSideEffect { effect ->
         when (effect) {
             is PhoneNumberSideEffect.NavigateToOtp -> navigator.navigate(ScreenDestination.Otp(effect.phoneNumber))
-            is PhoneNumberSideEffect.ShowError -> snackbarHostState.showSnackbar(effect.message)
+            is PhoneNumberSideEffect.ShowError -> snackBarHostState.showSnackbar(effect.message)
         }
     }
 
-    Scaffold(snackbarHost = { SnackbarHost(snackbarHostState) }) { padding ->
+    Scaffold(snackbarHost = { SnackbarHost(snackBarHostState) }) { padding ->
         Column(
             modifier = Modifier
                 .fillMaxSize()
