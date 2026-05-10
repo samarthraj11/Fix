@@ -1,4 +1,4 @@
-package com.credit.feature.onboarding
+package com.credit.feature.onboarding.phone_otp
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel

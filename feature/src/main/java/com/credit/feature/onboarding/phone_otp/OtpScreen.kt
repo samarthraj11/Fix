@@ -1,4 +1,4 @@
-package com.credit.feature.onboarding
+package com.credit.feature.onboarding.phone_otp
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border

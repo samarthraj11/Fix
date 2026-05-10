@@ -1,4 +1,4 @@
-package com.credit.feature.onboarding
+package com.credit.feature.onboarding.phone_number
 
 sealed interface PhoneNumberSideEffect {
     data class NavigateToOtp(val phoneNumber: String) : PhoneNumberSideEffect
