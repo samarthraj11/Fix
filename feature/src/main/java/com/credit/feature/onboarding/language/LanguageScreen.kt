@@ -33,9 +33,10 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.credit.designsystem.components.CreditButton
 import com.credit.designsystem.tokens.LocalCreditColors
-import com.credit.feature.navigation.Destination
-import com.credit.feature.navigation.LocalNavigator
-import com.credit.feature.navigation.ScreenDestination
+import com.ramcosta.composedestinations.annotation.Destination
+import com.ramcosta.composedestinations.annotation.RootGraph
+import com.ramcosta.composedestinations.generated.destinations.PhoneNumberScreenDestination
+import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import org.orbitmvi.orbit.compose.collectAsState
 import org.orbitmvi.orbit.compose.collectSideEffect
 
@@ -48,15 +49,14 @@ private val SupportedLanguages = listOf(
 
 )
 
-@Destination
+@Destination<RootGraph>(start = true)
 @Composable
-fun LanguageScreen(viewModel: LanguageViewModel = hiltViewModel()) {
+fun LanguageScreen(navigator: DestinationsNavigator, viewModel: LanguageViewModel = hiltViewModel()) {
     val state by viewModel.collectAsState()
-    val navigator = LocalNavigator.current
 
     viewModel.collectSideEffect { effect ->
         when (effect) {
-            LanguageSideEffect.NavigateToPhoneNumber -> navigator.navigate(ScreenDestination.PhoneNumber)
+            LanguageSideEffect.NavigateToPhoneNumber -> navigator.navigate(PhoneNumberScreenDestination)
         }
     }
 

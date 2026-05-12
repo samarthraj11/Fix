@@ -32,24 +32,26 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.credit.designsystem.tokens.LocalCreditColors
 import com.credit.domain.model.Post
-import com.credit.feature.navigation.Destination
-import com.credit.feature.navigation.LocalNavigator
-import com.credit.feature.navigation.ScreenDestination
+import com.ramcosta.composedestinations.annotation.Destination
+import com.ramcosta.composedestinations.annotation.RootGraph
+import com.ramcosta.composedestinations.generated.destinations.LanguageScreenDestination
+import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import org.orbitmvi.orbit.compose.collectAsState
 import org.orbitmvi.orbit.compose.collectSideEffect
 
-@Destination
+@Destination<RootGraph>
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomeScreen(viewModel: HomeViewModel = hiltViewModel()) {
+fun HomeScreen(navigator: DestinationsNavigator, viewModel: HomeViewModel = hiltViewModel()) {
     val state by viewModel.collectAsState()
     val snackbarHostState = remember { SnackbarHostState() }
-    val navigator = LocalNavigator.current
 
     viewModel.collectSideEffect { effect ->
         when (effect) {
             is HomeSideEffect.ShowError -> snackbarHostState.showSnackbar(effect.message)
-            HomeSideEffect.NavigateToOnboarding -> navigator.navigate(ScreenDestination.Language)
+            HomeSideEffect.NavigateToOnboarding -> navigator.navigate(LanguageScreenDestination) {
+                popUpTo(LanguageScreenDestination) { inclusive = false }
+            }
         }
     }
 

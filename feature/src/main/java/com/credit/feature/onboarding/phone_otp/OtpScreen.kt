@@ -56,24 +56,26 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.credit.designsystem.components.CreditButton
 import com.credit.designsystem.tokens.LocalCreditColors
-import com.credit.feature.navigation.Destination
-import com.credit.feature.navigation.LocalNavigator
-import com.credit.feature.navigation.ScreenDestination
+import com.ramcosta.composedestinations.annotation.Destination
+import com.ramcosta.composedestinations.annotation.RootGraph
+import com.ramcosta.composedestinations.generated.destinations.HomeScreenDestination
+import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import org.orbitmvi.orbit.compose.collectAsState
 import org.orbitmvi.orbit.compose.collectSideEffect
 
-@Destination
+@Destination<RootGraph>
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun OtpScreen(viewModel: OtpViewModel = hiltViewModel()) {
+fun OtpScreen(navigator: DestinationsNavigator, phoneNumber: String, viewModel: OtpViewModel = hiltViewModel()) {
     val state by viewModel.collectAsState()
     val snackbarHostState = remember { SnackbarHostState() }
     val colors = LocalCreditColors.current
-    val navigator = LocalNavigator.current
 
     viewModel.collectSideEffect { effect ->
         when (effect) {
-            OtpSideEffect.NavigateToHome -> navigator.navigate(ScreenDestination.Home)
+            OtpSideEffect.NavigateToHome -> navigator.navigate(HomeScreenDestination) {
+                popUpTo(HomeScreenDestination) { inclusive = false }
+            }
             is OtpSideEffect.ShowError -> snackbarHostState.showSnackbar(effect.message)
         }
     }
@@ -83,7 +85,7 @@ fun OtpScreen(viewModel: OtpViewModel = hiltViewModel()) {
             TopAppBar(
                 title = {},
                 navigationIcon = {
-                    IconButton(onClick = { navigator.navigate(ScreenDestination.Back) }) {
+                    IconButton(onClick = { navigator.popBackStack() }) {
                         Icon(
                             imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                             contentDescription = "Back",
