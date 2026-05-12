@@ -49,23 +49,23 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
 import com.credit.designsystem.tokens.LocalCreditColors
-import com.credit.feature.navigation.Destination
-import com.credit.feature.navigation.LocalNavigator
-import com.credit.feature.navigation.ScreenDestination
+import com.ramcosta.composedestinations.annotation.Destination
+import com.ramcosta.composedestinations.annotation.RootGraph
+import com.ramcosta.composedestinations.generated.destinations.OtpScreenDestination
+import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import org.orbitmvi.orbit.compose.collectAsState
 import org.orbitmvi.orbit.compose.collectSideEffect
 
-@Destination
+@Destination<RootGraph>
 @Composable
-fun PhoneNumberScreen(viewModel: PhoneNumberViewModel = hiltViewModel()) {
+fun PhoneNumberScreen(navigator: DestinationsNavigator, viewModel: PhoneNumberViewModel = hiltViewModel()) {
     val state by viewModel.collectAsState()
     val snackBarHostState = remember { SnackbarHostState() }
     val colors = LocalCreditColors.current
-    val navigator = LocalNavigator.current
 
     viewModel.collectSideEffect { effect ->
         when (effect) {
-            is PhoneNumberSideEffect.NavigateToOtp -> navigator.navigate(ScreenDestination.Otp(effect.phoneNumber))
+            is PhoneNumberSideEffect.NavigateToOtp -> navigator.navigate(OtpScreenDestination(phoneNumber = effect.phoneNumber))
             is PhoneNumberSideEffect.ShowError -> snackBarHostState.showSnackbar(effect.message)
         }
     }
@@ -98,7 +98,7 @@ fun PhoneNumberScreen(viewModel: PhoneNumberViewModel = hiltViewModel()) {
                 },
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = 16.dp),
+                    .padding(horizontal = 24.dp),
                 textAlign = TextAlign.Center,
             )
 
@@ -107,7 +107,7 @@ fun PhoneNumberScreen(viewModel: PhoneNumberViewModel = hiltViewModel()) {
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = 16.dp),
+                    .padding(horizontal = 24.dp),
             ) {
                 Text(
                     text = "Enter your Mobile Number",
@@ -210,24 +210,6 @@ fun PhoneNumberScreen(viewModel: PhoneNumberViewModel = hiltViewModel()) {
                             modifier = Modifier.size(20.dp),
                         )
                     }
-                }
-
-                Spacer(Modifier.height(20.dp))
-
-                // Trust badge
-                Row(
-                    modifier = Modifier
-                        .align(Alignment.CenterHorizontally)
-                        .background(colors.primaryContainer, CircleShape)
-                        .padding(horizontal = 16.dp, vertical = 8.dp),
-                    verticalAlignment = Alignment.CenterVertically,
-                ) {
-                    Icon(
-                        imageVector = Icons.Filled.VerifiedUser,
-                        contentDescription = null,
-                        tint = colors.onPrimaryFixedVariant,
-                        modifier = Modifier.size(18.dp),
-                    )
                 }
             }
 
