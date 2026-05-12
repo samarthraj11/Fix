@@ -64,7 +64,8 @@ fun LanguageScreen(navigator: DestinationsNavigator, viewModel: LanguageViewMode
 
     Scaffold(
         bottomBar = {
-            Column(Modifier.padding(horizontal = 16.dp, vertical = 16.dp)) {
+            Column(Modifier.padding(horizontal = 24.dp, vertical = 16.dp)
+                .padding(bottom = 16.dp)) {
                 CreditButton(text = "Continue", onClick = viewModel::onContinue)
             }
         }
@@ -73,8 +74,7 @@ fun LanguageScreen(navigator: DestinationsNavigator, viewModel: LanguageViewMode
             modifier = Modifier
                 .fillMaxSize()
                 .padding(padding)
-                .verticalScroll(rememberScrollState())
-                .padding(horizontal = 16.dp),
+                .padding(horizontal = 24.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             Spacer(Modifier.height(32.dp))

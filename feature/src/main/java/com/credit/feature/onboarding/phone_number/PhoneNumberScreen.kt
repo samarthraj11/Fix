@@ -98,7 +98,7 @@ fun PhoneNumberScreen(navigator: DestinationsNavigator, viewModel: PhoneNumberVi
                 },
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = 16.dp),
+                    .padding(horizontal = 24.dp),
                 textAlign = TextAlign.Center,
             )
 
@@ -107,7 +107,7 @@ fun PhoneNumberScreen(navigator: DestinationsNavigator, viewModel: PhoneNumberVi
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = 16.dp),
+                    .padding(horizontal = 24.dp),
             ) {
                 Text(
                     text = "Enter your Mobile Number",
@@ -210,24 +210,6 @@ fun PhoneNumberScreen(navigator: DestinationsNavigator, viewModel: PhoneNumberVi
                             modifier = Modifier.size(20.dp),
                         )
                     }
-                }
-
-                Spacer(Modifier.height(20.dp))
-
-                // Trust badge
-                Row(
-                    modifier = Modifier
-                        .align(Alignment.CenterHorizontally)
-                        .background(colors.primaryContainer, CircleShape)
-                        .padding(horizontal = 16.dp, vertical = 8.dp),
-                    verticalAlignment = Alignment.CenterVertically,
-                ) {
-                    Icon(
-                        imageVector = Icons.Filled.VerifiedUser,
-                        contentDescription = null,
-                        tint = colors.onPrimaryFixedVariant,
-                        modifier = Modifier.size(18.dp),
-                    )
                 }
             }
 
